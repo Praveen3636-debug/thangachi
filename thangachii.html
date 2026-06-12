@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="ta" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>என் தங்கச்சிக்கு ❤️ - Thoothukudi to Vellore</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800;900&family=Hind+Madurai:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+<style>
+:root {
+  --pink: #e91e8c;
+  --purple: #9c27b0;
+  --dark-blue: #1a237e;
+  --gold: #ffd700;
+  --cream: #fff8f0;
+  --white: #ffffff;
+  --bg: #0a0520;
+  --bg2: #120835;
+  --card-bg: rgba(255,255,255,0.05);
+  --card-border: rgba(255,255,255,0.15);
+  --text: #ffffff;
+  --text-muted: rgba(255,255,255,0.7);
+  --glass: rgba(255,255,255,0.08);
+}
+[data-theme="light"] {
+  --bg: #fce4ec;
+  --bg2: #f8bbd0;
+  --card-bg: rgba(255,255,255,0.65);
+  --card-border: rgba(233,30,140,0.3);
+  --text: #1a0030;
+  --text-muted: rgba(26,0,48,0.7);
+  --glass: rgba(255,255,255,0.55);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Poppins', 'Hind Madurai', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  cursor: none;
+}
+.tamil { font-family: 'Hind Madurai', sans-serif; }
+
+/* ── CURSOR ── */
+#cursor { position:fixed;width:12px;height:12px;pointer-events:none;z-index:99999;transition:transform .1s; }
+.cursor-heart { position:fixed;pointer-events:none;z-index:99998;font-size:14px;animation:floatUp .8s ease-out forwards; }
+@keyframes floatUp { 0%{opacity:1;transform:translateY(0) scale(1)} 100%{opacity:0;transform:translateY(-60px) scale(0.5)} }
+
+/* ── LOADER ── */
+#loader {
+  position:fixed;inset:0;z-index:10000;
+  background: linear-gradient(135deg, #0a0520, #1a0050, #0a0520);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+}
+.loader-title { font-size:clamp(1.4rem,4vw,2.2rem);color:var(--gold);text-align:center;line-height:1.6; }
+.loader-subtitle { font-size:clamp(0.9rem,2.5vw,1.1rem);color:var(--pink);opacity:.8; }
+.loader-bar-wrap { width:260px;height:6px;background:rgba(255,255,255,.15);border-radius:99px;overflow:hidden; }
+.loader-bar { height:100%;width:0;background:linear-gradient(90deg,var(--pink),var(--gold));border-radius:99px;transition:width .05s; }
+.loader-hearts { font-size:2rem;animation:pulse 1s ease-in-out infinite; }
+@keyframes pulse { 0%,100%{transform:scale(1)} 50%{transform:scale(1.3)} }
+
+/* ── NAV ── */
+#navbar {
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:10px 20px;
+  background: rgba(10,5,32,0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(233,30,140,0.2);
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  flex-wrap: wrap;
+}
+.nav-logo { font-size:1.3rem;color:var(--gold);font-weight:700;white-space:nowrap; }
+.nav-links { display:flex;gap:4px;flex-wrap:wrap; }
+.nav-links a {
+  color:var(--text-muted);font-size:.72rem;padding:5px 8px;border-radius:20px;
+  text-decoration:none;transition:.3s;white-space:nowrap;
+}
+.nav-links a:hover { color:var(--gold);background:rgba(255,215,0,.1); }
+.nav-controls { display:flex;gap:8px;align-items:center; }
+.btn-icon {
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:var(--text);border-radius:50%;width:36px;height:36px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  font-size:1rem;transition:.3s;flex-shrink:0;
+}
+.btn-icon:hover { background:rgba(233,30,140,.3);border-color:var(--pink); }
+
+/* ── PARTICLES BG ── */
+#particles-bg {
+  position:fixed;inset:0;z-index:0;pointer-events:none;
+}
+.particle {
+  position:absolute;border-radius:50%;pointer-events:none;
+  animation: particleDrift linear infinite;
+}
+@keyframes particleDrift {
+  0%{transform:translateY(100vh) rotate(0deg);opacity:0}
+  10%{opacity:1}
+  90%{opacity:.5}
+  100%{transform:translateY(-100px) rotate(720deg);opacity:0}
+}
+
+/* ── FLOATING ELEMENTS ── */
+.float-gift {
+  position:fixed;font-size:1.8rem;pointer-events:none;z-index:1;
+  animation: giftFloat linear infinite;
+}
+@keyframes giftFloat {
+  0%{transform:translateY(110vh) rotate(0deg);opacity:0}
+  5%{opacity:1}
+  95%{opacity:.7}
+  100%{transform:translateY(-150px) rotate(360deg);opacity:0}
+}
+.float-heart {
+  position:fixed;font-size:1rem;pointer-events:none;z-index:1;
+  animation: heartFloat ease-in-out infinite;
+}
+@keyframes heartFloat {
+  0%,100%{transform:translateY(0) scale(1);opacity:.6}
+  50%{transform:translateY(-30px) scale(1.2);opacity:1}
+}
+.float-star {
+  position:fixed;pointer-events:none;z-index:1;
+  animation: starTwinkle ease-in-out infinite;
+}
+@keyframes starTwinkle {
+  0%,100%{opacity:0;transform:scale(0.5)}
+  50%{opacity:1;transform:scale(1)}
+}
+
+/* ── BUTTERFLY ── */
+.butterfly {
+  position:fixed;font-size:1.6rem;pointer-events:none;z-index:2;
+  animation: butterflyFly linear forwards;
+}
+@keyframes butterflyFly {
+  0%{transform:translateX(-100px) translateY(0);opacity:0}
+  5%{opacity:1}
+  95%{opacity:1}
+  100%{transform:translateX(110vw) translateY(-100px);opacity:0}
+}
+
+/* ── SECTIONS ── */
+section {
+  position:relative;z-index:10;
+  min-height:100vh;
+  padding:100px 20px 60px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.section-inner { max-width:900px;width:100%;margin:0 auto; }
+
+/* ── GLASS CARD ── */
+.glass {
+  background: var(--glass);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 30px;
+}
+
+/* ── MARQUEE ── */
+.marquee-wrap {
+  position:relative;z-index:10;
+  overflow:hidden;
+  background: linear-gradient(90deg, var(--pink), var(--purple), var(--dark-blue));
+  padding: 14px 0;
+}
+.marquee-track {
+  display:flex;gap:60px;
+  animation: marqueeScroll 35s linear infinite;
+  white-space:nowrap;
+}
+.marquee-track span { color:#fff;font-size:.9rem;opacity:.95; }
+@keyframes marqueeScroll { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
+
+/* ── PAGE 1: WELCOME ── */
+#welcome {
+  background: radial-gradient(ellipse at 50% 50%, #2a0060 0%, #0a0520 70%);
+  text-align:center;gap:30px;
+}
+.welcome-title {
+  font-size:clamp(1.5rem,4.5vw,3rem);
+  color:var(--gold);
+  line-height:1.4;
+  text-shadow: 0 0 40px rgba(255,215,0,.5);
+  animation: glowPulse 3s ease-in-out infinite;
+}
+@keyframes glowPulse {
+  0%,100%{text-shadow:0 0 20px rgba(255,215,0,.4)}
+  50%{text-shadow:0 0 60px rgba(255,215,0,.9),0 0 100px rgba(233,30,140,.5)}
+}
+.welcome-sub {
+  font-size:clamp(1rem,2.5vw,1.3rem);
+  color:var(--pink);
+  opacity:.9;
+  margin-top:10px;
+}
+.btn-enter {
+  margin-top:20px;
+  padding:16px 50px;
+  background: linear-gradient(135deg, var(--pink), var(--purple));
+  color:#fff;border:none;border-radius:50px;
+  font-size:1.2rem;font-family:inherit;
+  cursor:pointer;position:relative;overflow:hidden;
+  box-shadow: 0 0 30px rgba(233,30,140,.5);
+  transition: transform .3s, box-shadow .3s;
+}
+.btn-enter:hover { transform:scale(1.07);box-shadow:0 0 60px rgba(233,30,140,.8); }
+.btn-enter::after {
+  content:'';position:absolute;inset:0;
+  background:rgba(255,255,255,.3);border-radius:inherit;
+  animation:rippleOut 1.5s ease-out infinite;
+}
+@keyframes rippleOut {
+  0%{transform:scale(1);opacity:.5}
+  100%{transform:scale(2.5);opacity:0}
+}
+.sparkle-burst {
+  position:absolute;pointer-events:none;font-size:2rem;
+  animation: sparkleAnim .8s ease-out forwards;
+}
+@keyframes sparkleAnim {
+  0%{opacity:1;transform:translate(-50%,-50%) scale(0)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(2)}
+}
+
+/* ── PAGE 2: TIMELINE ── */
+#journey { background: linear-gradient(180deg, #0a0520, #120040, #0a0520); }
+.timeline { position:relative;padding:20px 0; }
+.timeline::before {
+  content:'';position:absolute;left:50%;top:0;bottom:0;width:3px;
+  background:linear-gradient(180deg,var(--pink),var(--purple),var(--gold));
+  transform:translateX(-50%);
+}
+.timeline-item {
+  display:flex;align-items:flex-start;gap:30px;margin-bottom:50px;
+  opacity:0;transform:translateY(40px);
+}
+.timeline-item:nth-child(odd) { flex-direction:row-reverse;text-align:right; }
+.timeline-dot {
+  flex-shrink:0;width:50px;height:50px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:1.3rem;border:3px solid var(--gold);
+  box-shadow:0 0 20px rgba(233,30,140,.5);position:relative;z-index:1;
+  margin-top:10px;
+}
+.timeline-content { flex:1; }
+.timeline-content h3 { color:var(--gold);font-size:1.1rem;margin-bottom:6px; }
+.timeline-content p { color:var(--text-muted);font-size:.9rem; }
+@media(max-width:600px) {
+  .timeline::before { left:24px; }
+  .timeline-item,.timeline-item:nth-child(odd) { flex-direction:row;text-align:left; }
+  .timeline-dot { width:40px;height:40px;font-size:1rem; }
+}
+.quote-box {
+  background:linear-gradient(135deg,rgba(233,30,140,.15),rgba(156,39,176,.15));
+  border:1px solid rgba(233,30,140,.4);
+  border-radius:20px;padding:25px;text-align:center;margin-top:30px;
+}
+.quote-box p { font-size:1rem;color:var(--text);line-height:1.8; }
+
+/* ── PAGE 3: MAP ── */
+#map-section { background:linear-gradient(135deg,#0a0520,#1a0050,#0a0520); }
+.map-container {
+  width:100%;max-width:500px;margin:0 auto;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);
+  border-radius:24px;padding:30px;
+  position:relative;overflow:hidden;
+}
+.tn-map-svg { width:100%;max-height:420px; }
+.city-marker { cursor:pointer; }
+.city-marker:hover circle { r:12; }
+.pulse-ring { animation: ringPulse 2s ease-out infinite; }
+@keyframes ringPulse { 0%{r:12;opacity:.8} 100%{r:28;opacity:0} }
+.travel-dot { animation: travelPath 4s linear infinite; }
+@keyframes travelPath {
+  0%{offset-distance:0%}
+  100%{offset-distance:100%}
+}
+.rotating-quotes { margin-top:20px;text-align:center;min-height:60px; }
+.rq { display:none;font-size:1rem;color:var(--pink);animation:fadeInOut 4s ease-in-out; }
+.rq.active { display:block; }
+@keyframes fadeInOut { 0%{opacity:0} 20%{opacity:1} 80%{opacity:1} 100%{opacity:0} }
+
+/* ── PAGE 4: GALLERY ── */
+#gallery { background:linear-gradient(180deg,#0a0520,#200060,#0a0520); }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:25px;
+  perspective:1000px;
+}
+.polaroid {
+  background:#fff;border-radius:4px;
+  padding:14px 14px 40px;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
+  cursor:pointer;position:relative;
+  transform-style:preserve-3d;transition:transform .6s;
+  animation: polaroidFloat ease-in-out infinite;
+}
+.polaroid:nth-child(odd) { transform: rotate(-2deg); }
+.polaroid:nth-child(even) { transform: rotate(2deg); }
+.polaroid:hover { z-index:5;box-shadow:0 20px 50px rgba(233,30,140,.3); }
+.polaroid.flipped { transform: rotate(0deg) rotateY(180deg) !important; }
+@keyframes polaroidFloat {
+  0%,100%{transform:translateY(0) rotate(var(--r,-2deg))}
+  50%{transform:translateY(-8px) rotate(var(--r,-2deg))}
+}
+.polaroid-front,.polaroid-back {
+  position:absolute;inset:0;backface-visibility:hidden;border-radius:4px;
+}
+.polaroid-front { background:#fff;padding:14px 14px 40px; }
+.polaroid-back {
+  background:linear-gradient(135deg,#ffe0f0,#f3e5f5);
+  transform:rotateY(180deg);
+  display:flex;align-items:center;justify-content:center;
+  padding:20px;text-align:center;
+}
+.polaroid-back p { color:#333;font-size:.85rem;line-height:1.6; }
+.polaroid-img {
+  width:100%;aspect-ratio:1;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  border-radius:2px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:2.5rem;
+}
+.polaroid-caption { text-align:center;margin-top:8px;color:#444;font-size:.8rem;font-family:'Hind Madurai',sans-serif; }
+
+/* ── PAGE 5: GIFTS ── */
+#gifts { background:radial-gradient(ellipse at 50% 50%,#1a0050,#0a0520); }
+.gifts-area {
+  position:relative;width:100%;min-height:500px;
+  border:2px dashed rgba(255,215,0,.3);border-radius:24px;overflow:hidden;
+}
+.gift-item {
+  position:absolute;font-size:2.2rem;cursor:pointer;
+  transition:transform .3s;user-select:none;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.5));
+}
+.gift-item:hover { transform:scale(1.3) rotate(10deg) !important; }
+.gift-item.opened { animation:giftOpen .5s ease forwards; }
+@keyframes giftOpen { 0%{transform:scale(1)} 50%{transform:scale(1.6) rotate(20deg)} 100%{transform:scale(0);opacity:0} }
+.gift-counter {
+  text-align:center;margin-top:20px;
+  font-size:1.2rem;color:var(--gold);font-weight:700;
+}
+.gift-modal {
+  position:fixed;inset:0;z-index:5000;
+  background:rgba(0,0,0,.8);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:.4s;
+}
+.gift-modal.show { opacity:1;pointer-events:all; }
+.gift-modal-box {
+  background:linear-gradient(135deg,#2a0060,#1a0050);
+  border:2px solid var(--gold);border-radius:24px;
+  padding:40px;max-width:400px;width:90%;text-align:center;
+  animation:popIn .4s cubic-bezier(.175,.885,.32,1.275);
+}
+@keyframes popIn { 0%{transform:scale(0) rotate(-20deg)} 100%{transform:scale(1) rotate(0)} }
+.gift-modal-box h2 { font-size:2.5rem;margin-bottom:15px; }
+.gift-modal-box p { font-size:1rem;color:var(--text);line-height:1.7; }
+.btn-close-modal {
+  margin-top:20px;padding:12px 35px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;border:none;border-radius:50px;cursor:pointer;font-size:1rem;
+}
+
+/* ── PAGE 6: GAMES ── */
+#games { background:linear-gradient(180deg,#0a0520,#001040,#0a0520); }
+.games-tabs { display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:30px; }
+.game-tab {
+  padding:10px 22px;border-radius:50px;
+  border:2px solid rgba(255,255,255,.2);
+  background:transparent;color:var(--text);cursor:pointer;
+  font-size:.9rem;font-family:inherit;transition:.3s;
+}
+.game-tab.active { background:linear-gradient(135deg,var(--pink),var(--purple));border-color:transparent; }
+.game-panel { display:none; }
+.game-panel.active { display:block; }
+.game-area {
+  background:rgba(0,0,0,.3);border-radius:20px;
+  padding:20px;min-height:400px;position:relative;overflow:hidden;
+}
+/* Game 1 */
+#hearts-area { position:relative;width:100%;height:380px;background:rgba(0,0,20,.4);border-radius:16px;overflow:hidden; }
+.falling-heart { position:absolute;font-size:1.8rem;cursor:pointer;animation:heartFall linear; }
+@keyframes heartFall { from{transform:translateY(-40px)} to{transform:translateY(420px)} }
+/* Game 2 */
+#balloons-area { position:relative;width:100%;height:380px;background:rgba(0,0,20,.4);border-radius:16px;overflow:hidden; }
+.balloon { position:absolute;cursor:pointer;user-select:none;animation:balloonRise linear; font-size:2rem; }
+@keyframes balloonRise { from{transform:translateY(420px)} to{transform:translateY(-80px)} }
+/* Game 3 */
+.memory-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:10px;max-width:380px;margin:0 auto; }
+.mem-card {
+  aspect-ratio:1;background:linear-gradient(135deg,var(--purple),var(--dark-blue));
+  border-radius:12px;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.8rem;border:2px solid rgba(255,255,255,.2);
+  transition:.4s;transform-style:preserve-3d;position:relative;user-select:none;
+}
+.mem-card.flipped { transform:rotateY(180deg);background:linear-gradient(135deg,var(--pink),var(--purple)); }
+.mem-card.matched { opacity:.5;pointer-events:none; }
+.mem-card-back { position:absolute;backface-visibility:hidden;transform:rotateY(180deg); }
+/* Game 4 */
+#spinner-canvas { display:block;margin:0 auto;max-width:280px;width:100%; }
+.spin-btn {
+  display:block;margin:20px auto 0;padding:14px 50px;
+  background:linear-gradient(135deg,var(--gold),#ff9800);
+  color:#000;border:none;border-radius:50px;
+  font-size:1.1rem;font-weight:700;cursor:pointer;font-family:inherit;
+}
+.spin-btn:disabled { opacity:.5;cursor:not-allowed; }
+.game-score { text-align:center;font-size:1.2rem;color:var(--gold);font-weight:700;margin-bottom:10px; }
+.btn-game {
+  padding:10px 28px;border-radius:50px;
+  background:linear-gradient(135deg,var(--pink),var(--purple));
+  color:#fff;border:none;cursor:pointer;font-family:inherit;font-size:.95rem;
+  margin:5px;
+}
+
+/* ── PAGE 7: SECRET LETTER ── */
+#letter { background:radial-gradient(ellipse at 50% 30%,#1a0040,#0a0520); }
+.chest-wrap { text-align:center;position:relative; }
+.chest-art {
+  font-size:8rem;display:inline-block;cursor:pointer;
+  filter:drop-shadow(0 0 30px rgba(255,215,0,.5));
+  transition:transform .3s;
+  animation:chestBob 3s ease-in-out infinite;
+}
+@keyframes chestBob { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+.chest-art.open { animation:chestOpen .5s ease forwards; }
+@keyframes chestOpen { 0%{transform:scale(1)} 50%{transform:scale(1.2) rotate(-5deg)} 100%{transform:scale(1.1)} }
+.unlock-form { margin:20px auto;max-width:350px; }
+.unlock-form input {
+  width:100%;padding:14px 20px;border-radius:50px;
+  background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.2);
+  color:var(--text);font-size:1rem;font-family:inherit;text-align:center;
+  outline:none;transition:.3s;
+}
+.unlock-form input:focus { border-color:var(--gold); }
+.btn-unlock {
+  margin-top:12px;padding:12px 40px;border-radius:50px;
+  background:linear-gradient(135deg,var(--gold),#ff9800);
+  color:#000;border:none;cursor:pointer;font-size:1rem;font-weight:700;font-family:inherit;
+}
+.letter-container {
+  display:none;max-width:600px;margin:30px auto;
+  background:linear-gradient(135deg,rgba(255,220,140,.1),rgba(233,30,140,.1));
+  border:2px solid var(--gold);border-radius:24px;padding:40px;
+  position:relative;overflow:hidden;
+}
+.letter-container::before {
+  content:'📜';font-size:8rem;position:absolute;
+  top:-20px;right:-20px;opacity:.1;
+}
+.letter-text { font-size:1rem;line-height:2;color:var(--text); }
+.letter-text strong { color:var(--gold); }
+.lantern { position:fixed;font-size:1.8rem;pointer-events:none;z-index:1;animation:lanternRise linear forwards; }
+@keyframes lanternRise { 0%{transform:translateY(110vh);opacity:0} 10%{opacity:1} 90%{opacity:.8} 100%{transform:translateY(-150px);opacity:0} }
+
+/* ── PAGE 8: FINALE ── */
+#finale { background:radial-gradient(ellipse at 50% 50%,#1a0060,#0a0520);text-align:center; }
+.finale-btn {
+  font-size:clamp(1.2rem,3vw,1.8rem);padding:25px 60px;
+  background:linear-gradient(135deg,var(--pink),var(--purple),var(--gold));
+  color:#fff;border:none;border-radius:50px;cursor:pointer;
+  font-family:inherit;font-weight:700;
+  box-shadow:0 0 50px rgba(233,30,140,.6);
+  animation:finalePulse 2s ease-in-out infinite;
+}
+@keyframes finalePulse {
+  0%,100%{transform:scale(1);box-shadow:0 0 50px rgba(233,30,140,.6)}
+  50%{transform:scale(1.05);box-shadow:0 0 80px rgba(233,30,140,.9),0 0 120px rgba(255,215,0,.4)}
+}
+.finale-message {
+  display:none;margin-top:40px;max-width:600px;
+  font-size:clamp(.95rem,2.5vw,1.2rem);line-height:2;color:var(--text);
+  animation:fadeInUp .8s ease forwards;
+}
+@keyframes fadeInUp { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+.finale-firework { position:fixed;pointer-events:none;z-index:200;font-size:2rem;animation:firework 1.5s ease-out forwards; }
+@keyframes firework { 0%{transform:translate(0,0) scale(1);opacity:1} 100%{transform:translate(var(--dx),var(--dy)) scale(0);opacity:0} }
+.share-btns { display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:30px; }
+.share-btn {
+  padding:12px 25px;border-radius:50px;cursor:pointer;border:none;
+  font-size:.9rem;font-family:inherit;font-weight:700;
+  background:linear-gradient(135deg,var(--gold),#ff9800);color:#000;
+  transition:.3s;
+}
+.share-btn:hover { transform:scale(1.1);box-shadow:0 5px 20px rgba(255,215,0,.4); }
+
+/* ── RAIN HEARTS ── */
+.rain-heart { position:fixed;top:-30px;pointer-events:none;z-index:300;font-size:1.3rem;animation:rainFall linear forwards; }
+@keyframes rainFall { to{transform:translateY(110vh) rotate(360deg);} }
+
+/* ── EASTER EGGS ── */
+.easter-egg { cursor:pointer;transition:.3s;display:inline-block; }
+.easter-egg:hover { transform:scale(1.3) rotate(20deg); }
+.easter-modal {
+  position:fixed;inset:0;z-index:6000;
+  background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;
+  opacity:0;pointer-events:none;transition:.3s;
+}
+.easter-modal.show { opacity:1;pointer-events:all; }
+.easter-box {
+  background:linear-gradient(135deg,#2a0060,#1a0050);
+  border:2px solid var(--gold);border-radius:20px;
+  padding:35px;max-width:350px;width:90%;text-align:center;
+  animation:popIn .3s ease forwards;
+}
+.easter-box h2 { font-size:3rem;margin-bottom:12px; }
+.easter-box p { color:var(--text);line-height:1.8;font-size:.95rem; }
+
+/* ── HEADINGS ── */
+.section-title { font-size:clamp(1.5rem,4vw,2.5rem);color:var(--gold);text-align:center;margin-bottom:10px;font-weight:800; }
+.section-sub { text-align:center;color:var(--text-muted);margin-bottom:40px;font-size:.95rem; }
+h2.s-title { font-size:clamp(1.3rem,3.5vw,2rem);color:var(--gold);margin-bottom:6px; }
+
+/* ── MUSIC PLAYER ── */
+#music-player {
+  position:fixed;bottom:20px;right:20px;z-index:2000;
+  background:rgba(10,5,32,.9);
+  backdrop-filter:blur(20px);
+  border:1px solid rgba(233,30,140,.4);
+  border-radius:50px;padding:10px 18px;
+  display:flex;align-items:center;gap:10px;
+  box-shadow:0 5px 20px rgba(0,0,0,.5);
+}
+#music-player span { font-size:.8rem;color:var(--text-muted); }
+
+/* ── UTILS ── */
+.text-gold { color:var(--gold); }
+.text-pink { color:var(--pink); }
+.text-center { text-align:center; }
+.mt-20 { margin-top:20px; }
+.mb-20 { margin-bottom:20px; }
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width:6px; }
+::-webkit-scrollbar-track { background:rgba(0,0,0,.3); }
+::-webkit-scrollbar-thumb { background:var(--pink);border-radius:3px; }
+
+/* Light mode overrides */
+[data-theme="light"] #navbar { background:rgba(252,228,236,.9); }
+[data-theme="light"] .nav-links a { color:rgba(26,0,48,.7); }
+[data-theme="light"] #welcome { background:radial-gradient(ellipse,#fce4ec,#f8bbd0); }
+[data-theme="light"] #journey { background:linear-gradient(180deg,#fce4ec,#f3e5f5,#fce4ec); }
+[data-theme="light"] #map-section { background:linear-gradient(135deg,#fce4ec,#ede7f6,#fce4ec); }
+[data-theme="light"] #gallery { background:linear-gradient(180deg,#fce4ec,#f3e5f5,#fce4ec); }
+[data-theme="light"] #gifts { background:radial-gradient(ellipse,#fff3e0,#fce4ec); }
+[data-theme="light"] #games { background:linear-gradient(180deg,#fce4ec,#e8eaf6,#fce4ec); }
+[data-theme="light"] #letter { background:radial-gradient(ellipse,#ede7f6,#fce4ec); }
+[data-theme="light"] #finale { background:radial-gradient(ellipse,#fff3e0,#fce4ec); }
+[data-theme="light"] .game-area { background:rgba(0,0,0,.08); }
+[data-theme="light"] #hearts-area,[data-theme="light"] #balloons-area { background:rgba(0,0,80,.06); }
+[data-theme="light"] .mem-card { background:linear-gradient(135deg,#ce93d8,#7986cb); }
+[data-theme="light"] .gifts-area { border-color:rgba(233,30,140,.4); }
+[data-theme="light"] #music-player { background:rgba(255,220,240,.95); border-color:rgba(233,30,140,.4); }
+[data-theme="light"] #music-player span { color:rgba(26,0,48,.7); }
+[data-theme="light"] .btn-icon { background:rgba(233,30,140,.1);color:#1a0030; }
+[data-theme="light"] .quote-box { background:linear-gradient(135deg,rgba(233,30,140,.08),rgba(156,39,176,.08)); }
+[data-theme="light"] .polaroid-caption { color:#555; }
+[data-theme="light"] .gift-modal-box { background:linear-gradient(135deg,#f3e5f5,#fce4ec); }
+[data-theme="light"] .gift-modal-box p { color:#1a0030; }
+[data-theme="light"] .letter-container { background:linear-gradient(135deg,rgba(255,215,0,.1),rgba(233,30,140,.08)); }
+[data-theme="light"] .unlock-form input { background:rgba(0,0,0,.08);color:#1a0030; }
+[data-theme="light"] .easter-box { background:linear-gradient(135deg,#f3e5f5,#fce4ec); }
+[data-theme="light"] .easter-box p { color:#1a0030; }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div id="cursor">❤️</div>
+
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-hearts">🎁 ❤️ 🎁</div>
+  <div class="loader-title tamil">என் தங்கச்சிக்கு<br>அன்பான வரவேற்பு ❤️</div>
+  <div class="loader-subtitle">A magical digital gift loading...</div>
+  <div class="loader-bar-wrap"><div class="loader-bar" id="loader-bar"></div></div>
+</div>
+
+<!-- PARTICLES BG -->
+<div id="particles-bg"></div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="nav-logo">❤️ தங்கச்சி</div>
+  <div class="nav-links">
+    <a href="#welcome">🏠 வரவேற்பு</a>
+    <a href="#journey">🌟 பயணம்</a>
+    <a href="#map-section">🗺️ நகரங்கள்</a>
+    <a href="#gallery">📸 நினைவுகள்</a>
+    <a href="#gifts">🎁 பரிசு</a>
+    <a href="#games">🎮 விளையாட்டு</a>
+    <a href="#letter">💌 கடிதம்</a>
+    <a href="#finale">✨ நிறைவு</a>
+  </div>
+  <div class="nav-controls">
+    <button class="btn-icon" id="theme-toggle" title="Toggle theme">🌙</button>
+    <button class="btn-icon" id="music-toggle" title="Toggle music">🔇</button>
+  </div>
+</nav>
+
+<!-- SECTION 1: WELCOME -->
+<section id="welcome">
+  <div style="position:relative;z-index:5;text-align:center;display:flex;flex-direction:column;align-items:center;gap:15px;">
+    <div style="font-size:3.5rem;animation:pulse 1.5s ease-in-out infinite;">🎁</div>
+    <h1 class="welcome-title tamil">தூத்துக்குடியிலிருந்து வேலூர் வரை ❤️</h1>
+    <p class="welcome-sub tamil">இரத்த உறவு இல்லை... ஆனால் இதய உறவு என்றும் இருக்கும்.</p>
+    <p style="color:var(--text-muted);font-size:.95rem;max-width:500px;line-height:1.7;">
+      This is a magical digital space crafted with every heartbeat,<br>just for you — my irreplaceable <strong style="color:var(--gold)">Thangachii</strong> ❤️
+    </p>
+    <button class="btn-enter" onclick="scrollToJourney()">✨ Enter Our World ✨</button>
+    <!-- Easter Egg 1 -->
+    <div style="margin-top:20px;opacity:.4;font-size:.8rem;color:var(--text-muted);">
+      <span class="easter-egg" onclick="openEaster('teddy')" title="Find me!">🧸</span>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE 1 -->
+<div class="marquee-wrap">
+  <div class="marquee-track" id="mq1">
+    <span class="tamil">உண்மையான உறவுகளுக்கு இரத்தம் தேவையில்லை... அன்பு மட்டும் போதும் ❤️</span>
+    <span class="tamil">ஒரே வீட்டில் பிறக்கவில்லை... ஆனால் ஒரே இதயத்தில் வாழ்கிறோம் ❤️</span>
+    <span class="tamil">தங்கச்சி என்பது ஒரு உறவு அல்ல... ஒரு அழகான உணர்வு ❤️</span>
+    <span class="tamil">தூரம் எவ்வளவு இருந்தாலும், அன்பு அருகில்தான் இருக்கும் ❤️</span>
+    <span class="tamil">நட்பு என்பது ஆத்மாக்களின் இணைவு — நம்முடையது அப்படிப்பட்டது ❤️</span>
+    <span class="tamil">YouTube-ல் கண்டோம்... இதயத்தில் தங்கினோம் ❤️</span>
+    <span class="tamil">அண்ணன் என்பவன் தூரத்தில் இருந்தாலும் அருகில் உணரச் செய்பவன் ❤️</span>
+    <!-- duplicate for seamless loop -->
+    <span class="tamil">உண்மையான உறவுகளுக்கு இரத்தம் தேவையில்லை... அன்பு மட்டும் போதும் ❤️</span>
+    <span class="tamil">ஒரே வீட்டில் பிறக்கவில்லை... ஆனால் ஒரே இதயத்தில் வாழ்கிறோம் ❤️</span>
+    <span class="tamil">தங்கச்சி என்பது ஒரு உறவு அல்ல... ஒரு அழகான உணர்வு ❤️</span>
+    <span class="tamil">தூரம் எவ்வளவு இருந்தாலும், அன்பு அருகில்தான் இருக்கும் ❤️</span>
+    <span class="tamil">நட்பு என்பது ஆத்மாக்களின் இணைவு — நம்முடையது அப்படிப்பட்டது ❤️</span>
+    <span class="tamil">YouTube-ல் கண்டோம்... இதயத்தில் தங்கினோம் ❤️</span>
+    <span class="tamil">அண்ணன் என்பவன் தூரத்தில் இருந்தாலும் அருகில் உணரச் செய்பவன் ❤️</span>
+  </div>
+</div>
+
+<!-- SECTION 2: JOURNEY -->
+<section id="journey">
+  <div class="section-inner">
+    <h2 class="section-title">🌟 நமது பயணம்</h2>
+    <p class="section-sub tamil">Our Beautiful Story — ஒரு அழகான கதை</p>
+    <div class="timeline">
+      <div class="timeline-item">
+        <div class="timeline-dot">🎥</div>
+        <div class="timeline-content glass" style="padding:20px;border-radius:16px;">
+          <h3 class="tamil">YouTube Live-ல் முதல் சந்திப்பு</h3>
+          <p class="tamil">ஒரு Live stream-ல் தொடங்கியது நம் கதை — ஆயிரக்கணக்கானவர்களில் நம்மை இணைத்தது விதி</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">💬</div>
+        <div class="timeline-content glass" style="padding:20px;border-radius:16px;">
+          <h3 class="tamil">முதல் பேச்சு தொடங்கியது</h3>
+          <p class="tamil">சில வார்த்தைகளில் ஒரு இணைப்பு உருவானது — அது வெறும் வார்த்தைகள் அல்ல, உணர்வுகளின் பரிமாற்றம்</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">📱</div>
+        <div class="timeline-content glass" style="padding:20px;border-radius:16px;">
+          <h3 class="tamil">Instagram-ல் இணைந்தோம்</h3>
+          <p class="tamil">Digital உலகில் தொடங்கிய நட்பு, இதயங்களை இணைக்கும் பாலமாக மாறியது</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🌙</div>
+        <div class="timeline-content glass" style="padding:20px;border-radius:16px;">
+          <h3 class="tamil">தினமும் பேசும் நண்பர்களாக மாறினோம்</h3>
+          <p class="tamil">காலை வணக்கம் முதல் இரவு நல்லிரவு வரை — தினமும் ஒரு புது கதை</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">❤️</div>
+        <div class="timeline-content glass" style="padding:20px;border-radius:16px;">
+          <h3 class="tamil">அண்ணன்-தங்கச்சி பந்தம் உருவானது</h3>
+          <p class="tamil">ஒரு நட்பு மட்டுமல்ல — ஒரு குடும்ப உறவு. இரத்தம் இல்லாமலே, இதயம் இணைந்தது</p>
+        </div>
+      </div>
+    </div>
+    <div class="quote-box">
+      <p class="tamil" style="font-size:1.05rem;line-height:2;color:var(--gold);">
+        "சில உறவுகள் பிறப்பால் வரும்... சில உறவுகள் மனதால் வரும்.<br>
+        நமது உறவு மனதால் வந்தது — அதனால் இது என்றும் மாறாது ❤️"
+      </p>
+    </div>
+  </div>
+  <!-- Easter Egg 2 -->
+  <span class="easter-egg" style="position:absolute;bottom:30px;right:40px;font-size:1.5rem;opacity:.5;" onclick="openEaster('star')">⭐</span>
+</section>
+
+<!-- MARQUEE 2 -->
+<div class="marquee-wrap" style="background:linear-gradient(90deg,var(--dark-blue),var(--purple),var(--pink));">
+  <div class="marquee-track" style="animation-direction:reverse;">
+    <span class="tamil">தூரம் நகரங்களுக்கு மட்டும்... நமக்கில்லை ❤️</span>
+    <span class="tamil">வேலூரில் நீ... தூத்துக்குடியில் நான்... நினைவுகளில் எப்போதும் நாம் ❤️</span>
+    <span class="tamil">இரண்டு நகரங்கள், ஒரே இதயம் ❤️</span>
+    <span class="tamil">~600 km தூரம் — ஆனால் இதயங்களுக்கு இடையே தூரமே இல்லை ❤️</span>
+    <span class="tamil">தூரம் நகரங்களுக்கு மட்டும்... நமக்கில்லை ❤️</span>
+    <span class="tamil">வேலூரில் நீ... தூத்துக்குடியில் நான்... நினைவுகளில் எப்போதும் நாம் ❤️</span>
+    <span class="tamil">இரண்டு நகரங்கள், ஒரே இதயம் ❤️</span>
+    <span class="tamil">~600 km தூரம் — ஆனால் இதயங்களுக்கு இடையே தூரமே இல்லை ❤️</span>
+  </div>
+</div>
+
+<!-- SECTION 3: MAP -->
+<section id="map-section">
+  <div class="section-inner">
+    <h2 class="section-title">🗺️ நமது நகரங்கள்</h2>
+    <p class="section-sub tamil">Thoothukudi ↔ Vellore — இரண்டு நகரங்கள், ஒரே இதயம்</p>
+    <div class="map-container">
+      <svg class="tn-map-svg" viewBox="0 0 300 500" xmlns="http://www.w3.org/2000/svg">
+        <!-- TN outline (simplified) -->
+        <path d="M100,10 L180,30 L220,80 L240,130 L250,180 L240,230 L200,270 L190,320 L170,380 L140,430 L110,470 L80,460 L60,420 L70,380 L80,330 L100,280 L120,240 L130,200 L110,160 L80,120 L70,80 L80,40 Z"
+          fill="rgba(100,50,200,0.25)" stroke="rgba(233,30,140,0.6)" stroke-width="2"/>
+        <!-- Thoothukudi (south coast) -->
+        <g class="city-marker" onclick="">
+          <circle cx="140" cy="430" r="10" fill="rgba(233,30,140,0.3)" stroke="var(--pink)" stroke-width="2"/>
+          <circle cx="140" cy="430" r="10" fill="none" stroke="var(--pink)" stroke-width="1.5" class="pulse-ring"/>
+          <text x="140" y="427" text-anchor="middle" font-size="12">🌊</text>
+          <text x="140" y="452" text-anchor="middle" fill="var(--gold)" font-size="9" font-family="Hind Madurai">தூத்துக்குடி</text>
+        </g>
+        <!-- Vellore (north) -->
+        <g class="city-marker">
+          <circle cx="155" cy="80" r="10" fill="rgba(156,39,176,0.3)" stroke="var(--purple)" stroke-width="2"/>
+          <circle cx="155" cy="80" r="10" fill="none" stroke="var(--purple)" stroke-width="1.5" class="pulse-ring" style="animation-delay:.5s"/>
+          <text x="155" y="77" text-anchor="middle" font-size="12">🏰</text>
+          <text x="155" y="102" text-anchor="middle" fill="var(--gold)" font-size="9" font-family="Hind Madurai">வேலூர்</text>
+        </g>
+        <!-- Animated travel heart path -->
+        <path id="travel-path" d="M140,420 Q80,280 155,90" fill="none" stroke="rgba(255,215,0,0.3)" stroke-width="1.5" stroke-dasharray="6,4"/>
+        <circle id="travel-dot" r="6" fill="var(--gold)">
+          <animateMotion dur="3s" repeatCount="indefinite">
+            <mpath href="#travel-path"/>
+          </animateMotion>
+        </circle>
+        <text x="90" y="270" fill="var(--pink)" font-size="8" font-family="Hind Madurai">❤️</text>
+        <circle>
+          <animateMotion dur="3s" repeatCount="indefinite" begin="1.5s">
+            <mpath href="#travel-path"/>
+          </animateMotion>
+        </circle>
+      </svg>
+      <div style="text-align:center;margin-top:10px;">
+        <span class="tamil" style="color:var(--gold);font-size:1.1rem;font-weight:700;">~600 km</span>
+        <span class="tamil" style="color:var(--text-muted);font-size:.85rem;display:block;margin-top:5px;">இதயங்களுக்கு இடையே தூரமே இல்லை ❤️</span>
+      </div>
+      <div class="rotating-quotes" id="rq-container">
+        <p class="rq active tamil">"தூரம் நகரங்களுக்கு மட்டும்... நமக்கில்லை ❤️"</p>
+        <p class="rq tamil">"வேலூரில் நீ... தூத்துக்குடியில் நான்... நினைவுகளில் எப்போதும் நாம் ❤️"</p>
+        <p class="rq tamil">"இரண்டு நகரங்கள், ஒரே இதயம் ❤️"</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: GALLERY -->
+<section id="gallery">
+  <div class="section-inner">
+    <h2 class="section-title">📸 நினைவு சித்திரங்கள்</h2>
+    <p class="section-sub">Click a card to flip it and discover the memory 💌</p>
+    <div class="gallery-grid" id="gallery-grid"></div>
+    <div class="quote-box mt-20">
+      <p class="tamil" style="color:var(--gold);">
+        "நினைவுகள் காலத்தை வெல்லும் — உன்னோடு ஒவ்வொரு நிமிடமும் அழகானது ❤️"
+      </p>
+    </div>
+    <!-- Easter Egg 3 -->
+    <span class="easter-egg" style="display:block;text-align:center;margin-top:20px;font-size:1.5rem;opacity:.4;" onclick="openEaster('gift')">🎁</span>
+  </div>
+</section>
+
+<!-- MARQUEE 3 -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="tamil">நினைவுகள் காலத்தை வெல்லும் ❤️</span>
+    <span class="tamil">உன் சிரிப்பு என் நாளை அழகாக்கும் 😊</span>
+    <span class="tamil">தினமும் காலை வணக்கம் — ஒரு சின்ன அன்பு ☀️</span>
+    <span class="tamil">நீ என் தங்கச்சி — என்றும் என்றும் ❤️</span>
+    <span class="tamil">நினைவுகள் காலத்தை வெல்லும் ❤️</span>
+    <span class="tamil">உன் சிரிப்பு என் நாளை அழகாக்கும் 😊</span>
+    <span class="tamil">தினமும் காலை வணக்கம் — ஒரு சின்ன அன்பு ☀️</span>
+    <span class="tamil">நீ என் தங்கச்சி — என்றும் என்றும் ❤️</span>
+  </div>
+</div>
+
+<!-- SECTION 5: GIFTS -->
+<section id="gifts">
+  <div class="section-inner">
+    <h2 class="section-title">🎁 Surprise Gift Room</h2>
+    <p class="section-sub tamil">ஒவ்வொரு பெட்டியையும் திறந்து பரிசை கண்டறியுங்கள்!</p>
+    <div class="gift-counter" id="gift-counter">0 / 20 gifts opened 🎁</div>
+    <div class="gifts-area" id="gifts-area"></div>
+  </div>
+</section>
+
+<!-- GIFT MODAL -->
+<div class="gift-modal" id="gift-modal">
+  <div class="gift-modal-box">
+    <div id="gift-emoji" style="font-size:3rem;margin-bottom:10px;"></div>
+    <h2 id="gift-title" style="color:var(--gold);font-size:1.3rem;margin-bottom:10px;"></h2>
+    <p id="gift-msg" class="tamil"></p>
+    <button class="btn-close-modal" onclick="closeGiftModal()">மூடு 💝</button>
+  </div>
+</div>
+
+<!-- SECTION 6: GAMES -->
+<section id="games">
+  <div class="section-inner">
+    <h2 class="section-title">🎮 Fun Games Zone</h2>
+    <p class="section-sub tamil">விளையாடு, ரசி, ஆனந்தி!</p>
+    <div class="games-tabs">
+      <button class="game-tab active" onclick="switchGame(0)">❤️ Catch Hearts</button>
+      <button class="game-tab" onclick="switchGame(1)">🎈 Pop Balloons</button>
+      <button class="game-tab" onclick="switchGame(2)">🧠 Memory Match</button>
+      <button class="game-tab" onclick="switchGame(3)">🎁 Lucky Spinner</button>
+    </div>
+    <!-- Game 1 -->
+    <div class="game-panel active" id="game-panel-0">
+      <div class="game-area">
+        <div class="game-score">Score: <span id="g1-score">0</span> | Misses: <span id="g1-miss">0</span>/3 | Best: <span id="g1-best">0</span></div>
+        <div id="hearts-area"></div>
+        <div style="text-align:center;margin-top:10px;">
+          <button class="btn-game" onclick="startGame1()">▶ Start</button>
+        </div>
+      </div>
+    </div>
+    <!-- Game 2 -->
+    <div class="game-panel" id="game-panel-1">
+      <div class="game-area">
+        <div class="game-score">Score: <span id="g2-score">0</span> | Time: <span id="g2-timer">30</span>s</div>
+        <div id="balloons-area"></div>
+        <div style="text-align:center;margin-top:10px;">
+          <button class="btn-game" onclick="startGame2()">▶ Start</button>
+        </div>
+      </div>
+    </div>
+    <!-- Game 3 -->
+    <div class="game-panel" id="game-panel-2">
+      <div class="game-area">
+        <div class="game-score">Moves: <span id="g3-moves">0</span> | Time: <span id="g3-timer">0</span>s | Pairs: <span id="g3-pairs">0</span>/8</div>
+        <div class="memory-grid" id="memory-grid"></div>
+        <div style="text-align:center;margin-top:15px;">
+          <button class="btn-game" onclick="initGame3()">🔄 New Game</button>
+        </div>
+      </div>
+    </div>
+    <!-- Game 4 -->
+    <div class="game-panel" id="game-panel-3">
+      <div class="game-area">
+        <canvas id="spinner-canvas" width="280" height="280"></canvas>
+        <div id="spin-result" style="text-align:center;min-height:50px;margin-top:10px;font-size:1rem;color:var(--gold);"></div>
+        <button class="spin-btn" id="spin-btn" onclick="spinWheel()">🎰 Spin!</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 7: SECRET LETTER -->
+<section id="letter">
+  <div class="section-inner">
+    <h2 class="section-title">💌 Secret Letter Room</h2>
+    <p class="section-sub tamil">இந்த பூட்டை திறந்து அண்ணனின் இதய கடிதத்தை படி</p>
+    <div class="chest-wrap">
+      <div class="chest-art" id="chest">🎁</div>
+      <div class="unlock-form" id="unlock-form">
+        <p class="tamil" style="color:var(--text-muted);margin-bottom:12px;font-size:.9rem;">
+          Question: <strong style="color:var(--gold)">What platform did we first meet on?</strong><br>
+          <span style="font-size:.8rem;opacity:.7">(type in English, lowercase)</span>
+        </p>
+        <input type="text" id="unlock-input" placeholder="your answer..." onkeyup="if(event.key==='Enter')tryUnlock()">
+        <br>
+        <button class="btn-unlock" onclick="tryUnlock()">🔓 Unlock</button>
+        <p id="unlock-hint" style="color:var(--pink);margin-top:10px;font-size:.85rem;"></p>
+      </div>
+      <div class="letter-container" id="letter-container">
+        <div class="letter-text tamil" id="letter-text"></div>
+      </div>
+    </div>
+    <!-- Easter Egg 4 -->
+    <span class="easter-egg" style="position:absolute;bottom:40px;left:40px;font-size:1.5rem;opacity:.4;" onclick="openEaster('heart')">❤️</span>
+  </div>
+</section>
+
+<!-- SECTION 8: FINALE -->
+<section id="finale">
+  <div class="section-inner" style="text-align:center;">
+    <h2 class="section-title">✨ Grand Finale</h2>
+    <p class="section-sub tamil">நம் கதையின் இறுதி அத்தியாயம் — ஆனால் உறவு என்றும் தொடரும்</p>
+    <button class="finale-btn" onclick="triggerFinale()">❤️ Grand Finale-ஐ கிளிக் செய்யுங்கள்</button>
+    <div class="finale-message tamil" id="finale-msg">
+      <p style="color:var(--gold);font-size:1.4rem;font-weight:700;margin-bottom:20px;">
+        தூத்துக்குடி முதல் வேலூர் வரை,<br>
+        ஒரு தூரம் மட்டும் இல்லை...<br>
+        ஒரு அழகான அண்ணன்-தங்கச்சி உறவு பயணிக்கிறது ❤️
+      </p>
+      <p style="color:var(--text);line-height:2.2;font-size:1rem;">
+        YouTube-ல் தொடங்கி,<br>
+        Instagram-ல் வளர்ந்து,<br>
+        இதயத்தில் நிலைத்த நம் கதை —<br>
+        என்றும் அழியாதது.
+      </p>
+      <p style="color:var(--pink);font-size:1.3rem;font-weight:700;margin-top:20px;">
+        உன்னை நேசிக்கிறேன் தங்கச்சி ❤️
+      </p>
+      <div class="share-btns">
+        <button class="share-btn" onclick="shareMsg('whatsapp')">💚 WhatsApp</button>
+        <button class="share-btn" onclick="shareMsg('twitter')">🐦 Twitter</button>
+        <button class="share-btn" onclick="shareMsg('copy')">📋 Copy Link</button>
+        <button class="share-btn" onclick="shareMsg('instagram')">📸 Instagram</button>
+        <button class="share-btn" onclick="shareMsg('save')">💾 Save</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EASTER EGG MODAL -->
+<div class="easter-modal" id="easter-modal">
+  <div class="easter-box">
+    <div id="easter-emoji" style="font-size:3.5rem;"></div>
+    <p id="easter-msg" class="tamil" style="margin-top:12px;"></p>
+    <button class="btn-close-modal" style="margin-top:15px;" onclick="closeEaster()">💝 மூடு</button>
+  </div>
+</div>
+
+<!-- HIDDEN AUDIO -->
+<audio id="bg-audio" loop>
+  <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+// ═══════════════════════════════════════════
+// LOADER
+// ═══════════════════════════════════════════
+(function(){
+  const bar = document.getElementById('loader-bar');
+  let w=0;
+  const iv = setInterval(()=>{
+    w += Math.random()*4+1;
+    if(w>100) w=100;
+    bar.style.width = w+'%';
+    if(w>=100){
+      clearInterval(iv);
+      setTimeout(()=>{
+        const l = document.getElementById('loader');
+        l.style.transition='opacity .8s';
+        l.style.opacity='0';
+        setTimeout(()=>{ l.style.display='none'; initAll(); },800);
+      },500);
+    }
+  },60);
+})();
+
+// ═══════════════════════════════════════════
+// INIT ALL
+// ═══════════════════════════════════════════
+function initAll(){
+  initTheme();
+  initCursor();
+  initFloatingElements();
+  initButterflies();
+  initParticles();
+  initTimeline();
+  initRotatingQuotes();
+  initGallery();
+  initGifts();
+  initGame1(); initGame2(); initGame3(); initSpinner();
+  spawnLanterns();
+  launchSparkles();
+}
+
+// ═══════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════
+function initTheme(){
+  const saved = localStorage.getItem('theme')||'dark';
+  document.documentElement.setAttribute('data-theme',saved);
+  document.getElementById('theme-toggle').textContent = saved==='dark'?'🌙':'☀️';
+  document.getElementById('theme-toggle').onclick = ()=>{
+    const t = document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark';
+    document.documentElement.setAttribute('data-theme',t);
+    localStorage.setItem('theme',t);
+    document.getElementById('theme-toggle').textContent = t==='dark'?'🌙':'☀️';
+  };
+}
+
+// ═══════════════════════════════════════════
+// CURSOR HEART TRAIL
+// ═══════════════════════════════════════════
+function initCursor(){
+  const cur = document.getElementById('cursor');
+  let lastX=0,lastY=0;
+  document.addEventListener('mousemove',e=>{
+    cur.style.left=(e.clientX-6)+'px';
+    cur.style.top=(e.clientY-6)+'px';
+    if(Math.abs(e.clientX-lastX)>20||Math.abs(e.clientY-lastY)>20){
+      lastX=e.clientX; lastY=e.clientY;
+      const h = document.createElement('div');
+      h.className='cursor-heart';
+      h.textContent=['❤️','💕','💗','💖','✨'][Math.floor(Math.random()*5)];
+      h.style.left=(e.clientX-8)+'px';
+      h.style.top=(e.clientY-8)+'px';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),800);
+    }
+  });
+}
+
+// ═══════════════════════════════════════════
+// FLOATING GIFTS, HEARTS, STARS
+// ═══════════════════════════════════════════
+function initFloatingElements(){
+  const gifts=['🎁','🎀','🎊','🎉','💝'];
+  for(let i=0;i<18;i++){
+    const el = document.createElement('div');
+    el.className='float-gift';
+    el.textContent=gifts[i%gifts.length];
+    el.style.left=Math.random()*100+'vw';
+    el.style.animationDuration=(8+Math.random()*12)+'s';
+    el.style.animationDelay=(Math.random()*15)+'s';
+    el.style.fontSize=(1.2+Math.random()*1.5)+'rem';
+    document.body.appendChild(el);
+  }
+  const hearts=['❤️','💕','💗','💖','💓'];
+  for(let i=0;i<12;i++){
+    const el=document.createElement('div');
+    el.className='float-heart';
+    el.textContent=hearts[i%hearts.length];
+    el.style.left=Math.random()*100+'vw';
+    el.style.top=(10+Math.random()*80)+'vh';
+    el.style.animationDuration=(3+Math.random()*4)+'s';
+    el.style.animationDelay=(Math.random()*5)+'s';
+    document.body.appendChild(el);
+  }
+  for(let i=0;i<20;i++){
+    const el=document.createElement('div');
+    el.className='float-star';
+    el.textContent='✨';
+    el.style.left=Math.random()*100+'vw';
+    el.style.top=Math.random()*100+'vh';
+    el.style.animationDuration=(1.5+Math.random()*3)+'s';
+    el.style.animationDelay=(Math.random()*5)+'s';
+    el.style.fontSize=(.7+Math.random()*.8)+'rem';
+    document.body.appendChild(el);
+  }
+}
+
+// ═══════════════════════════════════════════
+// BUTTERFLIES
+// ═══════════════════════════════════════════
+function initButterflies(){
+  function spawnButterfly(){
+    const el=document.createElement('div');
+    el.className='butterfly';
+    el.textContent=['🦋','🌸','🌺'][Math.floor(Math.random()*3)];
+    el.style.top=(10+Math.random()*80)+'vh';
+    const dur=(6+Math.random()*8);
+    el.style.animationDuration=dur+'s';
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),(dur+1)*1000);
+  }
+  spawnButterfly();
+  setInterval(spawnButterfly,3000);
+}
+
+// ═══════════════════════════════════════════
+// PARTICLES
+// ═══════════════════════════════════════════
+function initParticles(){
+  const bg=document.getElementById('particles-bg');
+  const colors=['#e91e8c','#9c27b0','#ffd700','#ffffff'];
+  for(let i=0;i<40;i++){
+    const p=document.createElement('div');
+    p.className='particle';
+    const s=(2+Math.random()*4)+'px';
+    p.style.cssText=`width:${s};height:${s};left:${Math.random()*100}%;background:${colors[Math.floor(Math.random()*colors.length)]};opacity:${.2+Math.random()*.5};animation-duration:${6+Math.random()*10}s;animation-delay:${Math.random()*10}s;`;
+    bg.appendChild(p);
+  }
+}
+
+// ═══════════════════════════════════════════
+// TIMELINE SCROLL ANIMATION
+// ═══════════════════════════════════════════
+function initTimeline(){
+  const items=document.querySelectorAll('.timeline-item');
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach((e,i)=>{
+      if(e.isIntersecting){
+        setTimeout(()=>{
+          e.target.style.transition='opacity .6s, transform .6s';
+          e.target.style.opacity='1';
+          e.target.style.transform='translateY(0)';
+        },i*150);
+        obs.unobserve(e.target);
+      }
+    });
+  },{threshold:.1});
+  items.forEach(item=>obs.observe(item));
+}
+
+// ═══════════════════════════════════════════
+// ROTATING MAP QUOTES
+// ═══════════════════════════════════════════
+function initRotatingQuotes(){
+  const quotes=document.querySelectorAll('.rq');
+  let idx=0;
+  setInterval(()=>{
+    quotes[idx].classList.remove('active');
+    idx=(idx+1)%quotes.length;
+    quotes[idx].classList.add('active');
+  },4000);
+}
+
+// ═══════════════════════════════════════════
+// GALLERY
+// ═══════════════════════════════════════════
+const galleryData=[
+  {emoji:'😄',caption:'கண்ணீரில் சிரிப்பு',front:'We laughed until we cried',back:'அந்த சிரிப்புகள் என் வாழ்வின் சிறந்த நிமிடங்கள் — உன்னோடு மட்டுமே ❤️'},
+  {emoji:'☀️',caption:'தினமும் காலை வணக்கம்',front:'Good morning sunshine',back:'ஒவ்வொரு காலையும் உன் வணக்கம் என் நாளை அழகாக்கும் ☀️❤️'},
+  {emoji:'💬',caption:'ஏதாவது சொல்லாம-கேளாம்',front:'Random 3am conversations',back:'வார்த்தைகள் இல்லாமலும் புரிந்துகொள்ளும் உன்னோடான நட்பு அரிது 💬❤️'},
+  {emoji:'❤️',caption:'நீ என் தங்கச்சி',front:'You are my sister forever',back:'இரத்தம் அல்ல... ஆனால் உறவு உண்மையானது. நீ என் தங்கச்சி — என்றும் ❤️'},
+  {emoji:'🎵',caption:'பாட்டு நேரம்',front:'Music brings us closer',back:'நமக்குப் பிடித்த பாடல்கள் பாடும்போது, இடைவெளி மறந்துவிடும் 🎵❤️'},
+  {emoji:'🌙',caption:'இரவு நேர கதைகள்',front:'Midnight heart talks',back:'இரவு நேர உரையாடல்கள் — உலகம் தூங்கும்போது நம் நட்பு விழிக்கும் 🌙❤️'},
+  {emoji:'🏆',caption:'உன் வெற்றி என் பெருமை',front:'Your success is my pride',back:'நீ சாதிக்கும்போது, எனக்கும் பெருமையாக இருக்கும் — என் அழகான தங்கச்சி 🏆❤️'},
+  {emoji:'💌',caption:'அன்புக் கடிதங்கள்',front:'Letters from the heart',back:'வார்த்தைகளில் சொல்ல முடியாத அன்பை... இதயம் உணர்கிறது 💌❤️'},
+];
+
+function initGallery(){
+  const grid=document.getElementById('gallery-grid');
+  galleryData.forEach((d,i)=>{
+    const card=document.createElement('div');
+    card.className='polaroid';
+    card.style.setProperty('--r',(i%2===0?'-2deg':'2deg'));
+    card.style.animationDelay=(i*.3)+'s';
+    card.innerHTML=`
+      <div class="polaroid-front">
+        <div class="polaroid-img">${d.emoji}</div>
+        <div class="polaroid-caption tamil">${d.caption}</div>
+      </div>
+      <div class="polaroid-back"><p class="tamil">${d.back}</p></div>`;
+    card.onclick=()=>card.classList.toggle('flipped');
+    grid.appendChild(card);
+  });
+}
+
+// ═══════════════════════════════════════════
+// GIFTS
+// ═══════════════════════════════════════════
+const giftMessages=[
+  {emoji:'❤️',title:'அன்பான செய்தி',msg:'நீ என் வாழ்வின் சிறந்த பரிசு ❤️ உன்னை இழக்க விரும்பாத ஒன்று என் உறவு.'},
+  {emoji:'🍫',title:'Virtual Chocolate',msg:'இந்த சாக்லேட் போல் நம் நட்பும் இனிமையானது! 🍫 உண்ண முடியாது... ஆனால் உணர முடியும் ❤️'},
+  {emoji:'🌹',title:'Flower Bouquet',msg:'இந்த பூக்கள் உன்னுக்காக மட்டுமே 🌹🌸🌺 உன் வாழ்வும் இப்பூக்கள் போல் மலர்ந்திருக்கட்டும்!'},
+  {emoji:'🏆',title:'Gold Badge',msg:'🥇 Gold Badge of Sisterhood — Awarded to the most amazing Thangachii in the universe!'},
+  {emoji:'📜',title:'சிறு கவிதை',msg:'தூரம் எவ்வளவிருந்தாலும்\nநம் நட்பு குறையவில்லை\nவேலூர் முதல் தூத்துக்குடி வரை\nஒரே இதயம் துடிக்கிறது ❤️'},
+  {emoji:'😂',title:'Funny Message',msg:'நீ கேக்காம நான் solve பண்ணிட்டேன்... உன் வாழ்க்கையில் Best Friend கிட்டினு! நீயும் நானும் = Life complete! 😂❤️'},
+  {emoji:'💌',title:'Secret Note',msg:'யாரோட secret ஆவது keep பண்ண கஷ்டம்... ஆனா உன்னோட secret நான் கல்லறை வரைக்கும் வெளியே சொல்ல மாட்டேன்! அது promise ❤️'},
+  {emoji:'🌟',title:'Platinum Badge',msg:'✨ PLATINUM FRIENDSHIP BADGE ✨ — This is the highest honor, awarded to the one who holds a permanent place in my heart!'},
+  {emoji:'🤗',title:'Virtual Hug',msg:'இதோ ஒரு virtual அணைப்பு — பிடிமானமான அண்ணனிடம் இருந்து 🤗 தூரம் பரவாயில்லை, இதயம் அருகில் இருக்கு ❤️'},
+  {emoji:'⭐',title:'Wishing Star',msg:'இந்த நட்சத்திரம் உனக்காக எல்லா நல்லதும் வேண்டும் — happiness, success, love, laughter — எல்லாமே! ⭐❤️'},
+  {emoji:'🎵',title:'Tamil Song',msg:'🎵 "நீ என்னை அறிந்தாயோ... நான் உன்னை நேசித்தேன்..." — இந்த பாடல் நம்மிருவருக்காகவே 🎵❤️'},
+  {emoji:'💎',title:'Diamond Badge',msg:'💎 DIAMOND SISTER BADGE 💎 — Only ONE person in the world gets this. That person is YOU, Thangachii! ❤️'},
+  {emoji:'🌈',title:'Rainbow Promise',msg:'🌈 எத்தனை புயல் வந்தாலும், என் உறவு உன்னோடு rainbow போல் நிலைத்திருக்கும் — promise! ❤️'},
+  {emoji:'🦋',title:'Butterfly Message',msg:'🦋 நீ ஒரு அழகான பட்டாம்பூச்சி — உன் வாழ்க்கை இந்த butterfly போல் சுதந்திரமாக பறக்கட்டும்! ❤️'},
+  {emoji:'🎂',title:'Birthday Wish (Early)',msg:'🎂 உன் அடுத்த பிறந்த நாளில் — நான் முதல் ஒருவனாக wish செய்வேன்! 12:00 AM exactly! 🎉❤️'},
+  {emoji:'🌙',title:'Midnight Friend',msg:'🌙 வாழ்க்கையின் இருள் நேரத்தில், என் நட்பு ஒரு நிலவு போல் உனக்கு வெளிச்சம் தரும் ❤️'},
+  {emoji:'🎭',title:'Comedy Gift',msg:'😂 நாம் பேசும்போது என்னால் serious ஆ இருக்கவே முடியல... உன் jokes-கு என் brain கஷ்டப்படுது! 🤣❤️'},
+  {emoji:'💝',title:'Heart Gift',msg:'💝 இந்த இதயம் உன்னுக்கு — full capacity used: 100% Thangachii. No space for others! Just kidding... maybe 😄❤️'},
+  {emoji:'🏅',title:'Silver Badge',msg:'🥈 Silver Badge of Loyalty — For being the most loyal, caring, wonderful sister! Silver is precious... just like you! ❤️'},
+  {emoji:'🔮',title:'Magic Gift',msg:'🔮 Future prediction: You will have a wonderful life, great success, lots of happiness, and an amazing brother forever ❤️✨'},
+];
+const superGifts=[2,5,9,14,18];
+
+let openedGifts=0;
+const giftEmojis=['🎁','🎀','🎊','🎉','💝','🎈','🎆','🎇','🎁','🎀'];
+
+function initGifts(){
+  const area=document.getElementById('gifts-area');
+  const areaW=area.offsetWidth||350;
+  const areaH=500;
+  area.style.height=areaH+'px';
+  for(let i=0;i<20;i++){
+    const g=document.createElement('div');
+    g.className='gift-item';
+    g.textContent=giftEmojis[i%giftEmojis.length];
+    g.style.left=(5+Math.random()*85)+'%';
+    g.style.top=(5+Math.random()*85)+'%';
+    g.style.transform=`rotate(${-20+Math.random()*40}deg)`;
+    g.style.fontSize=(1.8+Math.random()*1.5)+'rem';
+    g.style.zIndex=Math.floor(Math.random()*10)+1;
+    g.dataset.idx=i;
+    g.onclick=()=>openGift(g,i);
+    area.appendChild(g);
+  }
+}
+
+function openGift(el,idx){
+  if(el.classList.contains('opened-done')) return;
+  el.classList.add('opened','opened-done');
+  openedGifts++;
+  document.getElementById('gift-counter').textContent=openedGifts+' / 20 gifts opened 🎁';
+  const data=giftMessages[idx%giftMessages.length];
+  if(superGifts.includes(idx)) triggerConfetti();
+  setTimeout(()=>{
+    document.getElementById('gift-emoji').textContent=data.emoji;
+    document.getElementById('gift-title').textContent=data.title;
+    document.getElementById('gift-msg').textContent=data.msg;
+    document.getElementById('gift-modal').classList.add('show');
+  },600);
+  if(openedGifts>=20){
+    setTimeout(()=>{
+      confetti({particleCount:200,spread:180,origin:{y:.5}});
+    },700);
+  }
+}
+function closeGiftModal(){ document.getElementById('gift-modal').classList.remove('show'); }
+
+// ═══════════════════════════════════════════
+// GAME 1: CATCH HEARTS
+// ═══════════════════════════════════════════
+let g1Running=false,g1Score=0,g1Miss=0,g1Best=0,g1Intervals=[];
+
+function startGame1(){
+  if(g1Running) return;
+  g1Running=true; g1Score=0; g1Miss=0;
+  updateG1();
+  const iv=setInterval(()=>{
+    if(!g1Running){ clearInterval(iv); return; }
+    spawnHeart();
+  },1200);
+  g1Intervals.push(iv);
+}
+
+function updateG1(){
+  document.getElementById('g1-score').textContent=g1Score;
+  document.getElementById('g1-miss').textContent=g1Miss;
+  document.getElementById('g1-best').textContent=g1Best;
+}
+
+function spawnHeart(){
+  const area=document.getElementById('hearts-area');
+  const h=document.createElement('div');
+  h.className='falling-heart';
+  h.textContent=['❤️','💕','💗','💖'][Math.floor(Math.random()*4)];
+  h.style.left=(5+Math.random()*85)+'%';
+  const dur=1.5+Math.random()*1.5;
+  h.style.animationDuration=dur+'s';
+  h.onclick=(e)=>{ e.stopPropagation(); g1Score++; if(g1Score>g1Best) g1Best=g1Score; updateG1(); h.remove(); triggerMicroBurst(e.clientX,e.clientY); };
+  area.appendChild(h);
+  setTimeout(()=>{
+    if(h.parentNode){ h.remove(); g1Miss++; updateG1();
+      if(g1Miss>=3){ g1Running=false; g1Intervals.forEach(clearInterval); g1Intervals=[];
+        showGameMsg('வாழ்க! Score: '+g1Score+' 🏆','hearts-area'); }
+    }
+  },dur*1000);
+}
+
+// ═══════════════════════════════════════════
+// GAME 2: POP BALLOONS
+// ═══════════════════════════════════════════
+let g2Running=false,g2Score=0,g2Timer=30,g2Iv=null,g2BallIv=null;
+const ballColors=['🎈','🎊','🎉','🎀','🔴','🟡','🟢','🔵','🟣','🟠'];
+
+function startGame2(){
+  if(g2Running) return;
+  g2Running=true; g2Score=0; g2Timer=30;
+  document.getElementById('g2-score').textContent=g2Score;
+  document.getElementById('g2-timer').textContent=g2Timer;
+  g2Iv=setInterval(()=>{
+    g2Timer--; document.getElementById('g2-timer').textContent=g2Timer;
+    if(g2Timer<=0){ g2Running=false; clearInterval(g2Iv); clearInterval(g2BallIv);
+      document.getElementById('balloons-area').innerHTML='';
+      showGameMsg('வாழ்க வாழ்க! Score: '+g2Score+' 🏆','balloons-area'); }
+  },1000);
+  g2BallIv=setInterval(()=>{
+    if(!g2Running){ clearInterval(g2BallIv); return; }
+    spawnBalloon();
+  },800);
+}
+
+function spawnBalloon(){
+  const area=document.getElementById('balloons-area');
+  const b=document.createElement('div');
+  b.className='balloon';
+  const isBonus=Math.random()<.2;
+  b.textContent=isBonus?'💫':ballColors[Math.floor(Math.random()*ballColors.length)];
+  b.style.left=(5+Math.random()*85)+'%';
+  const dur=2+Math.random()*2;
+  b.style.animationDuration=dur+'s';
+  b.style.fontSize=(1.5+Math.random()*1.5)+'rem';
+  b.onclick=(e)=>{
+    e.stopPropagation();
+    const pts=isBonus?3:1;
+    g2Score+=pts; document.getElementById('g2-score').textContent=g2Score;
+    b.style.transform='scale(2)'; b.style.opacity='0'; b.style.transition='.2s';
+    setTimeout(()=>b.remove(),200);
+    triggerMicroBurst(e.clientX,e.clientY,isBonus?'#ffd700':'#e91e8c');
+  };
+  area.appendChild(b);
+  setTimeout(()=>b.parentNode&&b.remove(),dur*1000);
+}
+
+// ═══════════════════════════════════════════
+// GAME 3: MEMORY MATCH
+// ═══════════════════════════════════════════
+const memEmojis=['❤️','🌸','🎁','⭐','🦋','🌙','🎵','💌'];
+let memCards=[],memFlipped=[],memMatched=0,memMoves=0,memTime=0,memIv=null,memLock=false;
+
+function initGame3(){
+  const grid=document.getElementById('memory-grid');
+  grid.innerHTML='';
+  memFlipped=[]; memMatched=0; memMoves=0; memTime=0; memLock=false;
+  document.getElementById('g3-moves').textContent=0;
+  document.getElementById('g3-pairs').textContent=0;
+  document.getElementById('g3-timer').textContent=0;
+  clearInterval(memIv);
+  const deck=[...memEmojis,...memEmojis].sort(()=>Math.random()-.5);
+  memCards=[];
+  deck.forEach((em,i)=>{
+    const c=document.createElement('div');
+    c.className='mem-card';
+    c.innerHTML=`<span class="mem-card-front" style="backface-visibility:hidden">❓</span><span class="mem-card-back">${em}</span>`;
+    c.dataset.emoji=em;
+    c.onclick=()=>flipMemCard(c);
+    grid.appendChild(c);
+    memCards.push(c);
+  });
+  memIv=setInterval(()=>{ memTime++; document.getElementById('g3-timer').textContent=memTime; },1000);
+}
+
+function flipMemCard(card){
+  if(memLock||card.classList.contains('flipped')||card.classList.contains('matched')) return;
+  card.classList.add('flipped');
+  memFlipped.push(card);
+  if(memFlipped.length===2){
+    memMoves++;
+    document.getElementById('g3-moves').textContent=memMoves;
+    memLock=true;
+    setTimeout(()=>{
+      const [a,b]=memFlipped;
+      if(a.dataset.emoji===b.dataset.emoji){
+        a.classList.add('matched'); b.classList.add('matched');
+        memMatched++; document.getElementById('g3-pairs').textContent=memMatched;
+        if(memMatched===8){ clearInterval(memIv); triggerConfetti(); showGameMsg('வாழ்க வாழ்க! '+memMoves+' moves, '+memTime+'s ❤️🏆','memory-grid'); }
+      } else { a.classList.remove('flipped'); b.classList.remove('flipped'); }
+      memFlipped=[]; memLock=false;
+    },700);
+  }
+}
+
+function initGame1(){ document.getElementById('g1-score').textContent=0; }
+function initGame2(){ document.getElementById('g2-score').textContent=0; }
+
+// ═══════════════════════════════════════════
+// GAME 4: LUCKY SPINNER
+// ═══════════════════════════════════════════
+const spinPrizes=['Tamil Song 🎵','Sweet Message 💬','Virtual Hug 🤗','Gold Badge 🏆','Flower Bouquet 🌹','Chocolate 🍫','Secret Letter 💌','Extra Spin ✨'];
+const spinColors=['#e91e8c','#9c27b0','#1a237e','#c2185b','#6a1b9a','#283593','#ad1457','#4527a0'];
+let spinAngle=0,spinRunning=false;
+
+function initSpinner(){
+  drawWheel(0);
+}
+
+function drawWheel(rotation){
+  const canvas=document.getElementById('spinner-canvas');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  const W=canvas.width, H=canvas.height;
+  const cx=W/2, cy=H/2, r=cx-15;
+  ctx.clearRect(0,0,W,H);
+  const seg=2*Math.PI/8;
+  for(let i=0;i<8;i++){
+    const start=rotation+i*seg;
+    ctx.beginPath();
+    ctx.moveTo(cx,cy);
+    ctx.arc(cx,cy,r,start,start+seg);
+    ctx.closePath();
+    ctx.fillStyle=spinColors[i];
+    ctx.fill();
+    ctx.strokeStyle='rgba(255,255,255,.3)';
+    ctx.lineWidth=2;
+    ctx.stroke();
+    ctx.save();
+    ctx.translate(cx,cy);
+    ctx.rotate(rotation+i*seg+seg/2);
+    ctx.textAlign='right';
+    ctx.fillStyle='#fff';
+    ctx.font='bold 10px Poppins';
+    ctx.shadowColor='rgba(0,0,0,.5)';
+    ctx.shadowBlur=3;
+    ctx.fillText(spinPrizes[i],r-8,4);
+    ctx.restore();
+  }
+  // Center circle
+  ctx.beginPath();
+  ctx.arc(cx,cy,22,0,2*Math.PI);
+  ctx.fillStyle='#ffd700';
+  ctx.fill();
+  ctx.strokeStyle='#fff';
+  ctx.lineWidth=3;
+  ctx.stroke();
+  ctx.fillStyle='#000';
+  ctx.font='bold 14px Poppins';
+  ctx.textAlign='center';
+  ctx.textBaseline='middle';
+  ctx.fillText('🎁',cx,cy);
+  // Pointer
+  ctx.beginPath();
+  ctx.moveTo(cx+r+5,cy);
+  ctx.lineTo(cx+r+20,cy-10);
+  ctx.lineTo(cx+r+20,cy+10);
+  ctx.closePath();
+  ctx.fillStyle='#ffd700';
+  ctx.fill();
+}
+
+function spinWheel(){
+  if(spinRunning) return;
+  spinRunning=true;
+  document.getElementById('spin-btn').disabled=true;
+  document.getElementById('spin-result').textContent='';
+  const totalRot=(5+Math.random()*5)*2*Math.PI;
+  const dur=3000;
+  const start=performance.now();
+  const startAngle=spinAngle;
+  function animate(now){
+    const elapsed=now-start;
+    const t=Math.min(elapsed/dur,1);
+    const ease=1-Math.pow(1-t,4);
+    const cur=startAngle+totalRot*ease;
+    spinAngle=cur;
+    drawWheel(cur);
+    if(t<1){ requestAnimationFrame(animate); }
+    else {
+      spinRunning=false;
+      document.getElementById('spin-btn').disabled=false;
+      const seg=2*Math.PI/8;
+      const norm=((2*Math.PI)-(spinAngle%(2*Math.PI)))%(2*Math.PI);
+      const idx=Math.floor(norm/seg)%8;
+      const prize=spinPrizes[idx];
+      document.getElementById('spin-result').innerHTML=`<span style="font-size:1.4rem">🎉 ${prize}</span><br><span class="tamil" style="color:var(--text-muted);font-size:.85rem">வாழ்க வாழ்க! நீ வெற்றி பெற்றாய்! 🏆</span>`;
+      triggerConfetti();
+    }
+  }
+  requestAnimationFrame(animate);
+}
+
+// ═══════════════════════════════════════════
+// GAME SWITCH
+// ═══════════════════════════════════════════
+function switchGame(idx){
+  document.querySelectorAll('.game-panel').forEach((p,i)=>p.classList.toggle('active',i===idx));
+  document.querySelectorAll('.game-tab').forEach((t,i)=>t.classList.toggle('active',i===idx));
+  if(idx===2&&document.getElementById('memory-grid').children.length===0) initGame3();
+  if(idx===3) drawWheel(spinAngle);
+}
+
+// ═══════════════════════════════════════════
+// SECRET LETTER
+// ═══════════════════════════════════════════
+function tryUnlock(){
+  const val=document.getElementById('unlock-input').value.trim().toLowerCase();
+  if(val==='youtube'){
+    document.getElementById('chest').textContent='📦';
+    document.getElementById('chest').classList.add('open');
+    document.getElementById('unlock-form').style.display='none';
+    triggerConfetti();
+    spawnGoldenParticles();
+    const container=document.getElementById('letter-container');
+    container.style.display='block';
+    typewriterLetter();
+  } else {
+    document.getElementById('unlock-hint').textContent='❌ தவறான பதில். மீண்டும் முயற்சி செய்யுங்கள்!';
+    document.getElementById('unlock-input').style.borderColor='var(--pink)';
+    setTimeout(()=>{
+      document.getElementById('unlock-hint').textContent='';
+      document.getElementById('unlock-input').style.borderColor='';
+    },2000);
+  }
+}
+
+const letterContent=`என் அன்பான தங்கச்சிக்கு ❤️
+
+நீ என் இரத்த தங்கச்சி இல்லாவிட்டாலும்,
+என் வாழ்க்கையில் கிடைத்த சிறந்த தங்கச்சி நீ தான்.
+
+YouTube Live-ல் தொடங்கிய நம் கதை,
+இன்று ஒரு அழகான நட்பு பயணமாக மாறியிருக்கிறது.
+
+தூத்துக்குடியில் நான் இருந்தாலும்,
+வேலூரில் நீ இருந்தாலும் —
+நம் இதயங்கள் எப்போதும் அருகிலேயே உள்ளன.
+
+நீ சிரிக்கும்போது என் நாளும் அழகாகும்.
+நீ தேடும்போது நான் இருக்கிறேன்.
+நீ அழும்போது தோளாக இருக்கிறேன்.
+
+என்னை 'அண்ணா' என்று அழைக்கும் உன் குரல்
+என் காதில் இசை போல் ஒலிக்கும்.
+
+அன்போடு,
+உன் அண்ணன் ❤️`;
+
+function typewriterLetter(){
+  const el=document.getElementById('letter-text');
+  el.textContent='';
+  let i=0;
+  const iv=setInterval(()=>{
+    el.textContent+=letterContent[i];
+    el.scrollTop=el.scrollHeight;
+    i++;
+    if(i>=letterContent.length){
+      clearInterval(iv);
+      // Rain stars
+      for(let k=0;k<30;k++){
+        setTimeout(()=>{
+          const s=document.createElement('div');
+          s.style.cssText=`position:fixed;top:${Math.random()*100}vh;left:${Math.random()*100}vw;font-size:1.5rem;z-index:300;pointer-events:none;animation:sparkleAnim .8s ease-out forwards;`;
+          s.textContent=['⭐','🌸','✨','💝'][Math.floor(Math.random()*4)];
+          document.body.appendChild(s);
+          setTimeout(()=>s.remove(),900);
+        },k*100);
+      }
+    }
+  },30);
+}
+
+// ═══════════════════════════════════════════
+// FINALE
+// ═══════════════════════════════════════════
+let finaleTriggered=false;
+function triggerFinale(){
+  if(finaleTriggered) return;
+  finaleTriggered=true;
+  // Fireworks
+  for(let i=0;i<20;i++){
+    setTimeout(()=>{
+      confetti({
+        particleCount:80,
+        angle:60+Math.random()*60,
+        spread:60+Math.random()*60,
+        origin:{x:Math.random(),y:Math.random()*.5},
+        colors:['#e91e8c','#9c27b0','#ffd700','#fff','#ff6b6b']
+      });
+    },i*200);
+  }
+  // Hearts rain
+  for(let i=0;i<120;i++){
+    setTimeout(()=>{
+      const h=document.createElement('div');
+      h.className='rain-heart';
+      h.textContent=['❤️','💕','💗','💖','💓','💝'][Math.floor(Math.random()*6)];
+      h.style.left=Math.random()*100+'vw';
+      h.style.animationDuration=(2+Math.random()*3)+'s';
+      h.style.animationDelay='0s';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),5000);
+    },i*80);
+  }
+  // Gift boxes float up
+  for(let i=0;i<10;i++){
+    setTimeout(()=>{
+      const g=document.createElement('div');
+      g.style.cssText=`position:fixed;bottom:-50px;left:${Math.random()*100}vw;font-size:2rem;z-index:300;pointer-events:none;animation:giftFloat 4s ease forwards;`;
+      g.textContent=['🎁','🎀','🎊','🎉'][Math.floor(Math.random()*4)];
+      document.body.appendChild(g);
+      setTimeout(()=>g.remove(),5000);
+    },i*300);
+  }
+  // Golden flash
+  const flash=document.createElement('div');
+  flash.style.cssText='position:fixed;inset:0;background:rgba(255,215,0,.3);z-index:400;pointer-events:none;transition:.5s;';
+  document.body.appendChild(flash);
+  setTimeout(()=>{ flash.style.opacity='0'; setTimeout(()=>flash.remove(),500); },300);
+  // Show message
+  setTimeout(()=>{
+    const msg=document.getElementById('finale-msg');
+    msg.style.display='block';
+  },1500);
+}
+
+// ═══════════════════════════════════════════
+// EASTER EGGS
+// ═══════════════════════════════════════════
+const easterData={
+  teddy:{ emoji:'🧸', msg:'என்னை நினைக்கும்போது இந்த கரடியை அணைத்துக்கோ 🧸❤️\nஒவ்வொரு அணைப்பிலும் உன் அண்ணனின் அன்பு உணர்வாய்!' },
+  star:{ emoji:'⭐', msg:'நீ என் வாழ்வின் மிகப்பெரிய நட்சத்திரம் ⭐\nதொலைவில் இருந்தாலும் எப்போதும் பிரகாசிக்கிறாய்!' },
+  gift:{ emoji:'🎁', msg:'இந்த பரிசை திறக்க: உன் சிரிப்பை காட்டு 😄\nஆமா! உன் சிரிப்பே மிகப்பெரிய பரிசு! ❤️' },
+  heart:{ emoji:'❤️', msg:'இந்த இதயம் உன்னுடையது — என்றும் ❤️\nகொஞ்சம் கூட மாறாது, எந்த காலத்திலும்!' }
+};
+
+function openEaster(type){
+  const d=easterData[type];
+  document.getElementById('easter-emoji').textContent=d.emoji;
+  document.getElementById('easter-msg').textContent=d.msg;
+  document.getElementById('easter-modal').classList.add('show');
+  triggerMicroBurst(window.innerWidth/2,window.innerHeight/2,'#ffd700');
+}
+function closeEaster(){ document.getElementById('easter-modal').classList.remove('show'); }
+
+// ═══════════════════════════════════════════
+// LANTERNS
+// ═══════════════════════════════════════════
+function spawnLanterns(){
+  function spawn(){
+    const l=document.createElement('div');
+    l.className='lantern';
+    l.textContent=['🏮','🌟','💫','✨'][Math.floor(Math.random()*4)];
+    l.style.left=Math.random()*100+'vw';
+    const dur=5+Math.random()*5;
+    l.style.animationDuration=dur+'s';
+    document.body.appendChild(l);
+    setTimeout(()=>l.remove(),(dur+1)*1000);
+  }
+  setInterval(spawn,2000);
+}
+
+// ═══════════════════════════════════════════
+// WELCOME SPARKLES
+// ═══════════════════════════════════════════
+function launchSparkles(){
+  const sec=document.getElementById('welcome');
+  for(let i=0;i<15;i++){
+    setTimeout(()=>{
+      const s=document.createElement('div');
+      s.className='sparkle-burst';
+      s.textContent=['✨','⭐','🌟','💫'][Math.floor(Math.random()*4)];
+      s.style.left=(10+Math.random()*80)+'%';
+      s.style.top=(10+Math.random()*80)+'%';
+      s.style.position='absolute';
+      sec.appendChild(s);
+      setTimeout(()=>s.remove(),900);
+    },i*200);
+  }
+}
+
+// ═══════════════════════════════════════════
+// MUSIC
+// ═══════════════════════════════════════════
+let musicOn=false;
+document.getElementById('music-toggle').onclick=()=>{
+  const audio=document.getElementById('bg-audio');
+  musicOn=!musicOn;
+  if(musicOn){ audio.volume=0.3; audio.play().catch(()=>{}); document.getElementById('music-toggle').textContent='🔊'; }
+  else { audio.pause(); document.getElementById('music-toggle').textContent='🔇'; }
+};
+
+// ═══════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════
+function triggerConfetti(){
+  confetti({ particleCount:120, spread:100, origin:{y:.6}, colors:['#e91e8c','#9c27b0','#ffd700','#fff'] });
+}
+
+function triggerMicroBurst(x,y,color='#e91e8c'){
+  confetti({ particleCount:30, spread:60, origin:{x:x/window.innerWidth,y:y/window.innerHeight}, colors:[color,'#fff','#ffd700'], ticks:80 });
+}
+
+function spawnGoldenParticles(){
+  for(let i=0;i<20;i++){
+    setTimeout(()=>{
+      const p=document.createElement('div');
+      p.style.cssText=`position:fixed;top:50%;left:50%;font-size:1.5rem;z-index:500;pointer-events:none;animation:sparkleAnim .7s ease-out forwards;transform-origin:center;`;
+      p.textContent=['✨','⭐','🌟','💫','🏆'][Math.floor(Math.random()*5)];
+      p.style.marginLeft=(Math.random()*200-100)+'px';
+      p.style.marginTop=(Math.random()*200-100)+'px';
+      document.body.appendChild(p);
+      setTimeout(()=>p.remove(),800);
+    },i*60);
+  }
+}
+
+function showGameMsg(msg,parentId){
+  const el=document.getElementById(parentId);
+  if(!el) return;
+  const div=document.createElement('div');
+  div.style.cssText='position:absolute;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;z-index:100;border-radius:16px;flex-direction:column;gap:10px;text-align:center;padding:20px;';
+  div.innerHTML=`<div style="font-size:2rem">🏆</div><p class="tamil" style="color:#ffd700;font-size:1.1rem;font-weight:700;">${msg}</p><p class="tamil" style="color:rgba(255,255,255,.7);font-size:.9rem;">வாழ்க வாழ்க! நீ வெற்றி பெற்றாய்! 🏆</p>`;
+  el.appendChild(div);
+  triggerConfetti();
+  setTimeout(()=>div.remove(),4000);
+}
+
+function scrollToJourney(){ document.getElementById('journey').scrollIntoView({behavior:'smooth'}); }
+
+function shareMsg(type){
+  const text='என் தங்கச்சிக்கு இந்த magical digital gift! தூத்துக்குடி முதல் வேலூர் வரை — ஒரு இதய உறவு ❤️';
+  if(type==='whatsapp') window.open('https://wa.me/?text='+encodeURIComponent(text),'_blank');
+  else if(type==='twitter') window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text),'_blank');
+  else if(type==='copy'){ navigator.clipboard?.writeText(text).then(()=>alert('Copied! 📋')); }
+  else if(type==='instagram') alert('Open Instagram and share with your story! 📸\n'+text);
+  else if(type==='save') alert('Press Ctrl+D to bookmark this page! 💾\n\n'+text);
+}
+
+// ═══════════════════════════════════════════
+// WINDOW RESIZE — REINIT GIFTS
+// ═══════════════════════════════════════════
+window.addEventListener('resize', ()=>{ if(spinAngle!==undefined) drawWheel(spinAngle); });
+</script>
+</body>
+</html>
